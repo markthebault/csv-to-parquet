@@ -7,9 +7,9 @@ WORKDIR /app
 
 #install requirements
 COPY requirements.txt /app
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir --ignore-installed -r requirements.txt
 
-#copy the rest of files
-COPY . /app
+#copy the script
+COPY csv-to-parquet.py /app
 
 ENTRYPOINT ["python", "csv-to-parquet.py"]
