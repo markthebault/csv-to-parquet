@@ -20,3 +20,13 @@ you can specify how much rows should be processed at once with the argument `--c
 ## test with titanic.csv
 
 `make test`
+
+
+## Generate a huge csv
+In the data folder there is a python script that will generate hug CSV (by default 2.2GB, 10 million rows), if you want to change those parameters, you need to edit the file an replace
+Usage:
+```
+$ pip install faker
+$ python data/generate-csv.py --file /tmp/small.csv --records 100 --duplicates 1
+$ python data/generate-csv.py --file /tmp/big.csv --records 1000 --duplicates 10000
+```

@@ -1,6 +1,7 @@
 import csv
 from faker import Faker
 import datetime
+import argparse
 
 def datagenerate(file_name, replication, records, headers):
     fake = Faker('en_US')
@@ -33,12 +34,23 @@ def datagenerate(file_name, replication, records, headers):
                     "Link": fake.url(),
                     "Text": fake.word(),
                     }
-            for i in range(1, replication):
+            for i in range(0, replication):
                 writer.writerow(row)
     
 if __name__ == '__main__':
-    records = 1000
+
+    #arguments
+    parser = argparse.ArgumentParser(description='Convert a CSV file to a parquet files')
+    parser.add_argument('--records', type=int, help='Number of unique records that will be created (default: 1000)', nargs='?',default=1000)
+    parser.add_argument('--duplicates', type=int, help='Duplicate the record "n" times, this is to faster the generation process', nargs='?',default=10000)
+    parser.add_argument('--file', type=str, help='File name and path that will be produced', nargs='?')
+    args = parser.parse_args()
+
+    records = args.records
+    replication = args.duplicates
+    filepath = args.file
+
     headers = ["Email Id", "Prefix", "Name", "Birth Date", "Phone Number", "Additional Email Id",
                "Address", "Zip Code", "City","State", "Country", "Year", "Time", "Link", "Text"]
-    datagenerate("data.csv", 10000, records, headers)
-    print("CSV generation complete!")
+    datagenerate(filepath, replication, records, headers)
+    print("{}: CSV generation complete!".format(filepath) )
