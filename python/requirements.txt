@@ -1,0 +1,4 @@
+python-snappy
+fastparquet
+pandas
+pyarrow
