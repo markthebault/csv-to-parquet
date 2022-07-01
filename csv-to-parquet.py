@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser(description='Convert a CSV file to a parquet fi
 parser.add_argument('--csv',  type=str, help='source data, path of the csv file')
 parser.add_argument('--parquet', type=str, help='destination data, path of the parquet file without extention')
 parser.add_argument('--separator', type=str, help='CSV separator, devault ","', nargs='?',default=",")
-parser.add_argument('--chunksize', type=str, help='Amount of rows read at once', nargs='?',default=100000)
+parser.add_argument('--chunksize', type=int, help='Amount of rows read at once', nargs='?',default=100000)
 args = parser.parse_args()
 
 csv_file = args.csv
